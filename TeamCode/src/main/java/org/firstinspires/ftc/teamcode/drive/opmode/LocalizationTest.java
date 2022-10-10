@@ -1,5 +1,8 @@
 package org.firstinspires.ftc.teamcode.drive.opmode;
 
+import static org.firstinspires.ftc.teamcode.drive.StandardTrackingWheelLocalizer.X_MULTIPLIER;
+import static org.firstinspires.ftc.teamcode.drive.StandardTrackingWheelLocalizer.Y_MULTIPLIER;
+
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -29,15 +32,15 @@ public class LocalizationTest extends LinearOpMode {
                     new Pose2d(
                             -gamepad1.left_stick_y,
                             -gamepad1.left_stick_x,
-                            gamepad1.right_stick_x
+                            -gamepad1.right_stick_x
                     )
             );
 
             drive.update();
 
             Pose2d poseEstimate = drive.getPoseEstimate();
-            telemetry.addData("x", poseEstimate.getX());
-            telemetry.addData("y", poseEstimate.getY());
+            telemetry.addData("x", -poseEstimate.getX() * X_MULTIPLIER);
+            telemetry.addData("y", poseEstimate.getY() * Y_MULTIPLIER);
             telemetry.addData("heading", poseEstimate.getHeading());
             telemetry.update();
         }
