@@ -15,13 +15,14 @@ public class TestPath extends LinearOpMode {
         waitForStart();
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
+        //The coordinates are measured in inches from the center of the robot/odometry wheels
         Pose2d startPose = new Pose2d(0, 0, Math.toRadians(90));
 
         drive.setPoseEstimate(startPose);
 
         Trajectory traj1 = drive.trajectoryBuilder(startPose)
-                .splineTo(new Vector2d(0, 40), Math.toRadians(0))
-                .build();
+                
+                build();
 
         drive.followTrajectory(traj1);
     }
