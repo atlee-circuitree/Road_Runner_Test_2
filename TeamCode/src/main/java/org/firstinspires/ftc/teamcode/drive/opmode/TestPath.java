@@ -16,14 +16,17 @@ public class TestPath extends LinearOpMode {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
         //The coordinates are measured in inches from the center of the robot/odometry wheels
-        Pose2d startPose = new Pose2d(0, 0, Math.toRadians(90));
+        Pose2d startPose = new Pose2d(0, -10, Math.toRadians(90));
 
         drive.setPoseEstimate(startPose);
 
         Trajectory traj1 = drive.trajectoryBuilder(startPose)
-                
-                build();
-
+                .lineToSplineHeading(new Pose2d(0, 0, Math.toRadians(0)))
+                .splineToSplineHeading(new Pose2d(10, 10, Math.toRadians(270)), Math.toRadians(0))
+                .splineToSplineHeading(new Pose2d(20, 0, Math.toRadians(180)), Math.toRadians(270))
+                .splineToSplineHeading(new Pose2d(10, -10, Math.toRadians(90)), Math.toRadians(180))
+                .splineToSplineHeading(new Pose2d(0, 0, Math.toRadians(0)), Math.toRadians(90))
+                .build();
         drive.followTrajectory(traj1);
     }
 }
